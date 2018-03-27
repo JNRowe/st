@@ -20,6 +20,10 @@ static char *shell = "/bin/sh";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
+static char *openurlcmd[] = { "/bin/sh", "-c",
+   "xurls | dmenu -l 10 -w $WINDOWID | xargs -r open",
+   "externalpipe", NULL };
+
 /* identification sequence returned in DA and DECID */
 char *vtiden = "\033[?6c";
 
@@ -426,6 +430,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_I,           iso14755,       {.i =  0} },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ TERMMOD,              XK_U,           externalpipe,   { .v = openurlcmd } },
 };
 
 /*
